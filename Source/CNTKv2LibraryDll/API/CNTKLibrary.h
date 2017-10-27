@@ -784,6 +784,16 @@ namespace CNTK
         ///
         bool IsReadOnly() const { return m_isReadOnly; }
 
+        ///
+        /// Returns a boolean indicating if 'this' view is slice.
+        ///
+        bool IsSliceView() const { return m_isSliceView; }
+
+        ///
+        /// Set isSliceView to true 'this' view is slice.
+        ///
+        CNTK_API void setSliceView() { m_isSliceView = true; }
+
         // TODO: The set methods should be offered in template from
         ///
         /// Fill 'this' NDArrayView with the specified value. The underlying DataType of 'this' view should be DataType::Float.
@@ -897,6 +907,7 @@ namespace CNTK
         ::CNTK::StorageFormat m_storageFormat;
         NDShape m_viewShape;
         bool m_isReadOnly;
+        bool m_isSliceView;
 
         std::shared_ptr<void> m_tensorView; // Microsoft::MSR::CNTK::TensorView<ElemType>*
     };

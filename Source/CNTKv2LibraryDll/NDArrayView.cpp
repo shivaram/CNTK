@@ -372,7 +372,9 @@ namespace CNTK
             break;
         }
 
-        return MakeSharedObject<NDArrayView>(GetDataType(), Device(), GetStorageFormat(), sliceViewShape, IsReadOnly() || readOnly, tensorView);
+        NDArrayViewPtr sliceView = MakeSharedObject<NDArrayView>(GetDataType(), Device(), GetStorageFormat(), sliceViewShape, IsReadOnly() || readOnly, tensorView);
+        sliceView->setSliceView();
+        return sliceView;
     }
 
     NDArrayViewPtr NDArrayView::AsShape(const NDShape& newShape) const
