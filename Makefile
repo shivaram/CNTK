@@ -96,7 +96,8 @@ INCLUDEPATH+=$(PROTOBUF_PATH)/include
 # COMMON_FLAGS include settings that are passed both to NVCC and C++ compilers.
 COMMON_FLAGS:= -DHAS_MPI=$(HAS_MPI) -D_POSIX_SOURCE -D_XOPEN_SOURCE=600 -D__USE_XOPEN2K -std=c++11
 CPPFLAGS:= 
-CXXFLAGS:= $(SSE_FLAGS) -std=c++0x -fopenmp -fpermissive -fPIC -Werror -fcheck-new
+# CXXFLAGS:= $(SSE_FLAGS) -std=c++0x -fopenmp -fpermissive -fPIC -Werror -fcheck-new
+CXXFLAGS:= $(SSE_FLAGS) -std=c++0x -fopenmp -fpermissive -fPIC -fcheck-new
 LIBPATH:=
 LIBS_LIST:=
 LDFLAGS:=
@@ -1509,7 +1510,7 @@ $(OBJDIR)/%.o : %.cu $(BUILD_CONFIGURATION)
 	@echo $(SEPARATOR)
 	@echo creating $@ for $(ARCH) with build type $(BUILDTYPE)
 	@mkdir -p $(dir $@)
-	$(NVCC) -c $< -o $@ $(COMMON_FLAGS) $(CUFLAGS) $(INCLUDEPATH:%=-I%) -Xcompiler "-fPIC -Werror"
+	$(NVCC) -c $< -o $@ $(COMMON_FLAGS) $(CUFLAGS) $(INCLUDEPATH:%=-I%) -Xcompiler "-fPIC"
 
 $(OBJDIR)/%.pb.o : %.pb.cc $(BUILD_CONFIGURATION) 
 	@echo $(SEPARATOR)
